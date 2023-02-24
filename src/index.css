@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-image: url("./components/images/ethBackground3.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 90vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  width: 80vw;
+  height: 60vh;
+  margin: 0 auto;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tabs button {
+  background-color: lightgray;
+  text-shadow: 1px 1px #8147e5;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 25px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.5s ease-out;
+}
+
+.tabs button:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.tabs button:disabled {
+  background-image: radial-gradient(100% 100% at 100% 0, #DC1FFF 0, #03E1FF 100%);
+  color: white;
+}
+
+.title {
+  color: black;
+  font-size: medium;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+
+.content {
+  padding: 50px 80px;
+  background-color: white;
+  font-weight: 300;
+  line-height: 30px;
+  font-size: 16px;
+  text-align: justify;
+}
+
+.content,
+button {
+  font-size: 15px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  margin-top: 7vh;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 960px) {
+
+  .container {
+    width: 100%;
+  }
+
+  .content {
+    padding: 50px;
+  }
+}
