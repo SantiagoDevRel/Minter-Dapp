@@ -1,4 +1,5 @@
 # ♾️ METANA WEEK 3 ♾️
+
 Assignment:
 You must have a total of 7 tokens within the collection id [0-6]
 There is no supply limit for each token
@@ -18,13 +19,21 @@ Important if the website detects someone is not on the polygon network, it must 
 Important please use some styling on this website to make it look nice (bootstrap, tailwind CSS, etc). This is something you can show to future employers or business partners.
 You must use 2 separate contracts. One for the ERC1155 token, and one for the forging logic. The forging logic will need mint privileges.
 Warning: Start on this assignment early. The solidity code is easy to write, but the frontend integration and workflows will have a lot of unfamiliar problems we will not explicitly teach you about. It is inevitable that you will encounter them in this assignment, so start early!
-# Contract MultiTokem (ERC1155)
-```0x8EDF94B03e15171bab5C6DBDa4Efb1C57263Ed96```
 
-# Contract Forging 
-```0xFfb1F858c947e5120c3e2855d73d95B341809d58```
+# Contract MultiToken (ERC1155)
 
-# Deployed dApp
-```https://super-shadow-2050.on.fleek.co/```
+`0x7EFe898fd70Df162930B0A419AC9A6E10993f29a`
+`https://mumbai.polygonscan.com/address/0x7EFe898fd70Df162930B0A419AC9A6E10993f29a#code`
 
-![dAppImage](./src/components/images/dappImage.jpg)
+# Contract Forging
+
+`0xd1CaA16056eA13b19e123C7d20bdFaF1fc30eB66`
+`https://mumbai.polygonscan.com/address/0xd1CaA16056eA13b19e123C7d20bdFaF1fc30eB66#code`
+
+# Dapp deployed to
+
+`https://super-shadow-2050.on.fleek.co/`
+
+# Hardhat Coverage
+
+![Hardhat_Coveragge](https://github.com/strujilloz/Metana/blob/main/Week3/erc1155-multitoken/src/components/images/hardhat_coverage.png)

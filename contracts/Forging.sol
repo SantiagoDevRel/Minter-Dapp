@@ -25,8 +25,7 @@ contract Forging {
     //user can mint only every 1 minute (recommended to mint once in batchs instead of token by token)
     mapping(address => uint) private timeMinted;
 
-    //TIPO "Bach" instead of "Batch" 
-    function mintBachToken(uint [] memory _tokenIds, uint [] memory _amount) public {
+    function mintBatchToken(uint [] memory _tokenIds, uint [] memory _amount) public {
         require(timeMinted[msg.sender] + 1 minutes < block.timestamp, "FORGING: Please wait 1 minute.");
         require(_tokenIds[0] == 0 && _tokenIds[1] == 1 && _tokenIds[2] == 2 && _tokenIds.length <= 3, "FORGING: You can mint only tokens 0,1 and 2.");
         token.mintBatch(msg.sender, _tokenIds, _amount);
@@ -45,6 +44,7 @@ contract Forging {
     */
 
     function forgeTokens(uint[] memory ids, uint [] memory amounts) public {
+        uint totalAmountToMint = amounts[0];
         for(uint i=0;i<amounts.length-1;){
             //check all the amounts are equal
             assert(amounts[i] == amounts[i+1]);
@@ -53,21 +53,26 @@ contract Forging {
             }
         }
 
-        if(ids.length == 3){
+        if(ids.length >= 3 && ids[0] == 0 && ids[1] == 1){
+            if(ids[2] == 2){
             //get token 6
-            _burnAndMint(6, amounts[0], ids, amounts);
+            _burnAndMint(6, totalAmountToMint, ids, amounts);
+            }else{
+                //get token 3 
+                _burnAndMint(3, totalAmountToMint, ids, amounts);
+            }
         }else{
             if(ids[0] == 0 && ids[1] == 1){
                 //get token 3
-                _burnAndMint(3, amounts[0], ids, amounts);
+                _burnAndMint(3, totalAmountToMint, ids, amounts);
             }
             else if(ids[0] == 1 && ids[1] == 2){
                 //get token 4
-                _burnAndMint(4, amounts[0], ids, amounts);
+                _burnAndMint(4, totalAmountToMint, ids, amounts);
             }
             else if(ids[0] == 0 && ids[1] == 2){
                 //get token 5
-                _burnAndMint(5, amounts[0], ids, amounts);
+                _burnAndMint(5, totalAmountToMint, ids, amounts);
             }
             else{
                 //burn tokens 3,4,5,6 and get nothing back.

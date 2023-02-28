@@ -7,7 +7,6 @@ import Header from "./components/General_Components/Header";
 import ConnectMumbai from "./components/General_Components/ConnectMumbai";
 import ForgingABI from "./artifacts/contracts/Forging.sol/Forging.json";
 import MultiTokenABI from "./artifacts/contracts/MultiToken.sol/MultiToken.json";
-import { formatEther } from "ethers/lib/utils";
 const ForgingAddress = "0xd1CaA16056eA13b19e123C7d20bdFaF1fc30eB66";
 const MultiTokenAddress = "0x7EFe898fd70Df162930B0A419AC9A6E10993f29a";
 let contractMultiToken = null,
@@ -138,7 +137,7 @@ export default function App() {
 
   return (
     <>
-      {networkName != "maticmum" ? (
+      {networkName !== "maticmum" ? (
         <div>
           <ConnectMumbai />
           <Footer />
