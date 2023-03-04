@@ -21,15 +21,15 @@ contract Forging {
         token = _token;
     }
 
-    //mapping to track the timestamp when the user mint
-    //user can mint only every 1 minute (recommended to mint once in batchs instead of token by token)
-    mapping(address => uint) private timeMinted;
+    //users can mint only every 1 minute (recommended to mint once in batchs instead of token by token)
+    uint public timeMinted;
 
     function mintBatchToken(uint [] memory _tokenIds, uint [] memory _amount) public {
-        require(timeMinted[msg.sender] + 1 minutes < block.timestamp, "FORGING: Please wait 1 minute.");
+        require(timeMinted + 1 minutes < block.timestamp, "FORGING: Please wait 1 minute.");
         require(_tokenIds[0] == 0 && _tokenIds[1] == 1 && _tokenIds[2] == 2 && _tokenIds.length <= 3, "FORGING: You can mint only tokens 0,1 and 2.");
+        require(_amount[0] == 1 && _amount[1] == 1 && _amount[2] == 1, "FORGING: Max quantity is 1 token every mint.");
         token.mintBatch(msg.sender, _tokenIds, _amount);
-        timeMinted[msg.sender] = block.timestamp;
+        timeMinted = block.timestamp;
     }
 
 
@@ -88,13 +88,12 @@ contract Forging {
 
     /*
         * Trade function
-        * user can trade tokens 0, 1 and 3 with each other 
-        * user will receive the same quantity of tokens burned
-        * ex: user sends x5 tokens0, user will receive x5 tokens1
+        * user can trade tokens 0, 1, 2 and 3 
+        * but can only get token 0,1 and 2.
     */
 
     function tradeTokens(uint _tokenIdGive, uint _amountToExchange, uint _tokenIdReceive) public {
-        if(_tokenIdGive > 2 || _tokenIdReceive > 2){
+        if(_tokenIdGive > 3 || _tokenIdReceive > 2){
             revert("FORGING: You can trade only tokens 0,1, and 2.");
         }
         token.burn(msg.sender, _tokenIdGive, _amountToExchange);
