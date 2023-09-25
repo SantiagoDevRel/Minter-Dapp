@@ -47,11 +47,7 @@ export async function forgeTokens(tokenIds, amounts) {
 
 export async function tradeTokens(tokenGive, amount, tokenReceive) {
   try {
-    const tradeTx = await contractForging.tradeTokens(
-      tokenGive,
-      amount,
-      tokenReceive
-    );
+    const tradeTx = await contractForging.tradeTokens(tokenGive, amount, tokenReceive);
     await tradeTx.wait();
   } catch (err) {
     console.log(err);
@@ -89,17 +85,9 @@ export default function App() {
     await sliceWallet();
     const balanceUser = ethers.utils.formatEther(await signer.getBalance());
     setBalance(balanceUser.slice(0, 5));
-    contractMultiToken = new ethers.Contract(
-      MultiTokenAddress,
-      MultiTokenABI.abi,
-      provider
-    );
+    contractMultiToken = new ethers.Contract(MultiTokenAddress, MultiTokenABI.abi, provider);
     await getBalanceBatch();
-    contractForging = new ethers.Contract(
-      ForgingAddress,
-      ForgingABI.abi,
-      signer
-    );
+    contractForging = new ethers.Contract(ForgingAddress, ForgingABI.abi, signer);
   };
 
   let sliceWallet = async () => {
@@ -113,18 +101,7 @@ export default function App() {
   }, [showWallet]);
 
   const getBalanceBatch = async () => {
-    const balances = await contractMultiToken.balanceOfBatch(
-      [
-        fullWallet,
-        fullWallet,
-        fullWallet,
-        fullWallet,
-        fullWallet,
-        fullWallet,
-        fullWallet,
-      ],
-      [0, 1, 2, 3, 4, 5, 6]
-    );
+    const balances = await contractMultiToken.balanceOfBatch([fullWallet, fullWallet, fullWallet, fullWallet, fullWallet, fullWallet, fullWallet], [0, 1, 2, 3, 4, 5, 6]);
     const mapBalances = balances.map((balance) => parseInt(balance._hex)); //Maybe formatEther?
     setBalanceToken0(mapBalances[0]);
     setBalanceToken1(mapBalances[1]);
@@ -144,21 +121,8 @@ export default function App() {
         </div>
       ) : (
         <div>
-          <Header
-            showWallet={showWallet}
-            fullWallet={fullWallet}
-            network={networkName}
-            balanceMatic={balance}
-          />
-          <Tabs
-            token0={balanceToken0}
-            token1={balanceToken1}
-            token2={balanceToken2}
-            token3={balanceToken3}
-            token4={balanceToken4}
-            token5={balanceToken5}
-            token6={balanceToken6}
-          />
+          <Header showWallet={showWallet} fullWallet={fullWallet} network={networkName} balanceMatic={balance} />
+          <Tabs token0={balanceToken0} token1={balanceToken1} token2={balanceToken2} token3={balanceToken3} token4={balanceToken4} token5={balanceToken5} token6={balanceToken6} />
           <Footer />
         </div>
       )}
